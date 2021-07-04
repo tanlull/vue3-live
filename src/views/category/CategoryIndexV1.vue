@@ -33,16 +33,7 @@
                 </td>
             </tr>
           </tbody>
-        </table><br />
-        <div v-if="categories.length > 0">
-          <v-pagination
-            v-model="page"
-            :pages="totalPage"
-            :range-size="1"
-            active-color="#DCEDFF"
-            @update:modelValue="getData"
-          />
-        </div>
+        </table>
       </div>
     </div>
   </div>
@@ -53,28 +44,21 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import {BASE_API_URL} from '../../constants';
 import Swal from 'sweetalert2';
-import VPagination from "@hennge/vue3-pagination";
+
 
 export default {
   name: "CategoryIndex",
-  components: {
-    VPagination
-  },
   setup() {
     const categories = ref([]); // array of products
     const errorMessage = ref("");
     const loading = ref(false);
-    const page = ref(1);
-    const totalPage = ref(0);
-
-    const getData = async (page) => {
+    const getData = async () => {
       try {
         loading.value = true;
         const response = await axios.get(
-          `${BASE_API_URL}/api/category?page=${page}&page_size=10`,
+          `${BASE_API_URL}/api/category`,
         );
-        categories.value = response.data.data; // array of data
-        totalPage.value = response.data.last_page;
+        categories.value = response.data; // array of data
         //console.log(products.value);
       } catch (error) {
         console.log(error);
@@ -85,7 +69,7 @@ export default {
     };
 
     onMounted(() => {
-      getData(page.value);
+      getData();
     });
 
   const deleteCategoryById = async (id) => {
@@ -102,7 +86,7 @@ export default {
       history.go(0);
     }
   }
-    return { categories, errorMessage, loading,deleteCategoryById ,page,totalPage,getData};
+    return { categories, errorMessage, loading,deleteCategoryById };
   },
 };
 </script>
