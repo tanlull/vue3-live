@@ -24,6 +24,12 @@
             </div>
             สินค้า
           </router-link>
+          <router-link class="nav-link" to="/category">
+            <div class="sb-nav-link-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            หมวดหมู่สินค้า
+          </router-link>
           <a class="nav-link" href="charts.html">
             <div class="sb-nav-link-icon">
               <i class="fas fa-chart-area"></i>

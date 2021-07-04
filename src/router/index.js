@@ -4,6 +4,8 @@ import About from "../views/About.vue";
 import Product from "../views/Product.vue";
 import DashBoard from "../layouts/DashBoard.vue";
 
+import categoryRoutes from "../views/category/category-route";
+
 const routes = [
   {
     path: "/",
@@ -11,9 +13,9 @@ const routes = [
     component: DashBoard,
     children: [
       {
-        path:"",
+        path: "",
         name: "Home",
-        component: Home
+        component: Home,
       },
       {
         path: "about",
@@ -25,14 +27,16 @@ const routes = [
         name: "Product",
         component: Product,
       },
-    ]
+
+      ...categoryRoutes,
+    ],
   },
 
   {
     path: "/login",
     name: "Login",
     component: () =>
-      import(/* webpackChunkName: "login" */"../views/Login.vue"),
+      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
 ];
 
