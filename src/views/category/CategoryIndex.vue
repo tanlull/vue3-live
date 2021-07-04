@@ -25,7 +25,12 @@
             <tr v-for="category in categories" :key="category.id">
               <th scope="row">{{ category.id }}</th>
               <td>{{ category.name }}</td>
-              <td>Edit | Delete</td>
+              <td>
+                <router-link :to="{name: 'CategoryEdit',params : {id: category.id}}">
+                Edit</router-link>
+                | 
+                <a href="#" @click.prevent="deleteCategoryById(category.id)"> Delete </a>
+                </td>
             </tr>
           </tbody>
         </table>
@@ -37,7 +42,9 @@
 <script>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import {BASE_API_URL} from '../../constants'
+import {BASE_API_URL} from '../../constants';
+import Swal from 'sweetalert2';
+
 
 export default {
   name: "CategoryIndex",
@@ -65,7 +72,21 @@ export default {
       getData();
     });
 
-    return { categories, errorMessage, loading };
+  const deleteCategoryById = async (id) => {
+
+    const isConfirm = window.confirm("Are you sure to delete ?");
+    if(isConfirm) {
+      const response = await axios.delete(`${BASE_API_URL}/api/category/${id}`);
+      //alert (response.data.message);
+       Swal.fire({
+        title: 'Good Job!',
+        text: response.data.message,
+        icon: 'success',
+      });
+      history.go(0);
+    }
+  }
+    return { categories, errorMessage, loading,deleteCategoryById };
   },
 };
 </script>

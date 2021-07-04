@@ -13,14 +13,17 @@ const categoryRutes = [
     children: [
       {
         path: "",
+        name: "CategoryIndex",
         component: CategoryIndex,
       },
       {
         path: "add",
+        name: "CategoryAdd",
         component: CategoryAdd,
       },
       {
-        path: "edit",
+        path: ":id/edit", //router parameter
+        name: "CategoryEdit",
         component: CategoryEdit,
       },
     ],
