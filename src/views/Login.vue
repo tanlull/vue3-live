@@ -91,6 +91,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { BASE_API_URL } from "../constants";
+import {useStore} from "vuex";
 
 export default {
   name: "Login",
@@ -98,7 +99,7 @@ export default {
     const email = ref("");
     const password = ref("");
     const router = useRouter();
-
+    const store = useStore();
     const onSubmit = async () => {
 
       try {
@@ -108,6 +109,7 @@ export default {
             });
           console.log(response.data);
           localStorage.setItem("token",JSON.stringify(response.data));
+          store.dispatch("getProfile");
       router.push("/");
       } catch (error) {
         alert(JSON.stringify(error.response.data)); //axios error
