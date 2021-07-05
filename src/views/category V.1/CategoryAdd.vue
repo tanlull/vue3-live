@@ -17,11 +17,32 @@
 </template>
 
 <script>
-import {useAdd} from './use/crud-category'; 
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+import Swal from "sweetalert2";
+import { BASE_API_URL } from "../../constants";
+
 export default {
   name: "CategoryAdd",
   setup() {
-    const { name, onSubmit }  = useAdd();
+    const name = ref("");
+    const router = useRouter();
+
+    const onSubmit = async () => {
+      const response = await axios.post(`${BASE_API_URL}/api/category`, {
+        name: name.value,
+      });
+      //alert(response.data.message);
+      Swal.fire({
+        title: "Good Job!",
+        text: response.data.message,
+        icon: "success",
+      });
+
+      router.replace("/category");
+    };
+
     return { name, onSubmit };
   },
 };
