@@ -43,8 +43,8 @@
         </div>
       </div>
       <div class="sb-sidenav-footer" v-if="profile">
-        <div class="small">Logged in as: {{profile?.name}}</div>
-        Email : {{profile?.email}}
+        <div class="small">Logged in as: {{ profile?.name }}</div>
+        Email : {{ profile?.email }}
       </div>
     </nav>
   </div>
@@ -52,19 +52,17 @@
 
 <script>
 import { useStore } from "vuex";
-import {computed} from "vue";
+import { computed } from "vue";
 export default {
   name: "SideNav",
   setup() {
     const store = useStore();
-const profile = computed(() => store.state.profile);
+    const profile = computed(() => store.state.profile);
     return {
-      profile
-    }
-
-  }
+      profile,
+    };
+  },
 };
 </script>
-
 
 <style></style>

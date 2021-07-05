@@ -56,7 +56,7 @@
 
 <script>
 import VPagination from "@hennge/vue3-pagination";
-import {useIndex} from "./use/crud-category";
+import { useIndex } from "./use/crud-category";
 
 export default {
   name: "CategoryIndex",
@@ -64,13 +64,15 @@ export default {
     VPagination,
   },
   setup() {
-    const { categories,
+    const {
+      categories,
       errorMessage,
       loading,
       deleteCategoryById,
       page,
       totalPage,
-      getData} = useIndex();
+      getData,
+    } = useIndex();
 
     return {
       categories,

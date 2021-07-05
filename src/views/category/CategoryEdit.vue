@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import {useEdit} from "./use/crud-category";
+import { useEdit } from "./use/crud-category";
 export default {
   name: "CategoryEdit",
   setup() {
-    const {name, onSubmit } = useEdit();
+    const { name, onSubmit } = useEdit();
 
     return { name, onSubmit };
   },

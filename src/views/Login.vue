@@ -54,7 +54,9 @@
                       "
                     >
                       <a class="small" href="password.html">Forgot Password?</a>
-                      <button class="btn btn-primary" type="submit">Login</button>
+                      <button class="btn btn-primary" type="submit">
+                        Login
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -91,7 +93,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { BASE_API_URL } from "../constants";
-import {useStore} from "vuex";
+import { useStore } from "vuex";
 
 export default {
   name: "Login",
@@ -101,23 +103,22 @@ export default {
     const router = useRouter();
     const store = useStore();
     const onSubmit = async () => {
-
       try {
-        const response = await axios.post(`${BASE_API_URL}/api/login`,{
+        const response = await axios.post(`${BASE_API_URL}/api/login`, {
           email: email.value,
-          password: password.value
-            });
-          console.log(response.data);
-          localStorage.setItem("token",JSON.stringify(response.data));
-          store.dispatch("getProfile");
-      router.push("/");
+          password: password.value,
+        });
+        console.log(response.data);
+        localStorage.setItem("token", JSON.stringify(response.data));
+        store.dispatch("getProfile");
+        router.push("/");
       } catch (error) {
         alert(JSON.stringify(error.response.data)); //axios error
       }
-    }
+    };
 
-    return { email, password, onSubmit }
-  }
+    return { email, password, onSubmit };
+  },
 };
 </script>
 

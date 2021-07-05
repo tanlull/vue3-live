@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid px-4">
-    <h1 class="mt-4" v-if="profile">   ยินดีต้อนรับ คุณ {{profile?.name}}</h1>
+    <h1 class="mt-4" v-if="profile">ยินดีต้อนรับ คุณ {{ profile?.name }}</h1>
     <h3 class="mt-4">Dashboard</h3>
     <ol class="breadcrumb mb-4">
       <li class="breadcrumb-item active">Dashboard</li>
@@ -85,20 +85,19 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from "@/components/HelloWorld.vue";
-import {computed} from "vue";
-  import { useStore } from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
-
   name: "Home",
   components: {
     //HelloWorld,
   },
-    setup() {
+  setup() {
     const store = useStore();
     const profile = computed(() => store.state.profile);
     return {
-      profile
-    }
+      profile,
+    };
   },
 };
 </script>
