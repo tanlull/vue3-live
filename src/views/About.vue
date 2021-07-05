@@ -8,6 +8,13 @@
     <button class="btn btn-info" @click="greet">Click</button>
     <p />
     <Logo />
+
+  <h1> upload </h1>
+  <form @submit.prevent="onSubmit" enctype="multipart/form-data">
+    <input type="file" name = "picture" ref="file" />
+    <button type="submit">Upload</button>
+  </form>
+
   </div>
 </template>
 
@@ -27,6 +34,8 @@ export default {
       alt: "My Picture",
     });
     const isShow = ref(false);
+const file = ref(null);
+
     const greet = () => {
       //alert("Greeting");
       email.value = "BINGO@hotmail.com"; // prop in JS must use .value
@@ -34,13 +43,25 @@ export default {
     };
 
     onMounted(() => {
-      alert("Hello About Page");
+      //alert("Hello About Page");
     });
 
     onUnmounted(() => {
-      alert("Bye About Page");
+      //alert("Bye About Page");
     });
-    return { email, googleurl, imgUrl, isShow, greet };
+
+    const onSubmit = () => {
+        console.log(file.value.files[0]);
+        const fileUpload = file.value.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(fileUpload);
+
+        reader.onload = (e) => {
+          const base64Image = e.target.result;
+          console.log(base64Image);
+        }
+    }
+    return { email, googleurl, imgUrl, isShow, greet , onSubmit,file};
   },
 };
 </script>
